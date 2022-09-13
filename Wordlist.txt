@@ -1,0 +1,8 @@
+password
+admin
+admin@123
+admin234
+simplepassword
+passwordhashed
+hackerman
+supersimplepassword
