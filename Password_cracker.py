@@ -23,6 +23,8 @@ class Cracker:
 			return self.sha1_digest()
 		elif self.algo_name == "sha256":
 			return self.sha256_digest()
+		elif self.algo_name == "sha512":
+			return self.sha512_digest()		
 		else:
 			print(default)
  
@@ -76,9 +78,26 @@ class Cracker:
 					return self.Wordlist_file[i].replace("\n" , "")
 			else:
 				return Fore.RED + "Password not found"
+	
+	
+	# SHA 512 Algorithm
+	def sha512_digest(self):
+		for i in range(0,len(self.Wordlist_file)):
+			self.hash2comp = hashlib.sha512(self.Wordlist_file[i].replace("\n","").encode()).hexdigest()
+
+			# just display fun - Can be muted if needed
+			if int(verbose_flag) == 1:
+				print(Fore.RED + " Word - " + Fore.WHITE +  self.Wordlist_file[i].replace("\n" , "") + Fore.RED + " Hash - " + Fore.WHITE + self.hash2comp + Fore.RED + " Password_hash - " + Fore.WHITE + self.hash2crack)
+				if self.hash2crack == self.hash2comp:
+					return self.Wordlist_file[i].replace("\n" , "")
+			elif int(verbose_flag) ==  0:
+				if self.hash2crack == self.hash2comp:
+					return self.Wordlist_file[i].replace("\n" , "")
+			else:
+				return Fore.RED + "Password not found"
 
 	
-
+# Main function 
 
 if __name__ == "__main__":
 	## File inputs 
