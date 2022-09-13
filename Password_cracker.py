@@ -1,4 +1,5 @@
 import hashlib
+from logging.config import valid_ident
 from re import S
 import colorama
 from colorama import Fore , Back 
@@ -20,6 +21,8 @@ class Cracker:
 			return self.md5_digest()
 		elif self.algo_name == "sha1":
 			return self.sha1_digest()
+		elif self.algo_name == "sha256":
+			return self.sha256_digest()
 		else:
 			print(default)
  
@@ -55,9 +58,27 @@ class Cracker:
 					return self.Wordlist_file[i].replace("\n" , "")
 			else:
 				return Fore.RED + "Password not found"
- 
-	# def case_3(self):
-	#     return "Mar"
+	
+	
+	# SHA 256 Algorithm
+	def sha256_digest(self):
+		for i in range(0,len(self.Wordlist_file)):
+			self.hash2comp = hashlib.sha256(self.Wordlist_file[i].replace("\n","").encode()).hexdigest()
+
+			# just display fun - Can be muted if needed
+			if int(verbose_flag) == 1:
+				print(Fore.RED + " Word - " + Fore.WHITE +  self.Wordlist_file[i].replace("\n" , "") + Fore.RED + " Hash - " + Fore.WHITE + self.hash2comp + Fore.RED + " Password_hash - " + Fore.WHITE + self.hash2crack)
+				if self.hash2crack == self.hash2comp:
+					return self.Wordlist_file[i].replace("\n" , "")
+
+			elif int(verbose_flag) ==  0:
+				if self.hash2crack == self.hash2comp:
+					return self.Wordlist_file[i].replace("\n" , "")
+			else:
+				return Fore.RED + "Password not found"
+
+	
+
 
 if __name__ == "__main__":
 	## File inputs 
