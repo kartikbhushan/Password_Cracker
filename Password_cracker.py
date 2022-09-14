@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# Written by - Kartik bhushan
+# Date - 12/09/2022
+
+# GPU accleration Code - Future Feature
+# from numba import jit , cuda 
+
 import hashlib
 from logging.config import valid_ident
 from re import S
@@ -28,6 +35,7 @@ class Cracker:
 		else:
 			print(default)
  
+
 	# def md5_hash(self):
 	def md5_digest(self):
 		for i in range(0,len(self.Wordlist_file)):
@@ -45,6 +53,7 @@ class Cracker:
 			else:
 				return Fore.RED + "Password not found"
 
+	# Sha 1 Algorithm
 	def sha1_digest(self):
 		for i in range(0,len(self.Wordlist_file)):
 			self.hash2comp = hashlib.sha1(self.Wordlist_file[i].replace("\n","").encode()).hexdigest()
@@ -106,7 +115,7 @@ if __name__ == "__main__":
 	Hashing_Algorithm = input("Algorithm :")
 	verbose_flag = input("Verbose Output (1/0) :")
 
-	# Read files 
+	# Read Wordlist files 
 	Wordlist_file = open(Wordlist , "r" , encoding='cp437').readlines()
 	
 	# Class object - Cracker
@@ -115,4 +124,4 @@ if __name__ == "__main__":
 	print(f"{Fore.GREEN}Cracked Password is = {Fore.RED}{Back.WHITE}{cracker.algo()}")
 	et = time.time()
 	elapsed_time = et-st 
-	print("Execution time:"+  time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
+	print(Fore.RED + "Execution time:"+ Fore.GREEN + time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
